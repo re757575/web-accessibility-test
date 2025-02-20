@@ -1,0 +1,194 @@
+<!-- 參考 https://www.tna.gov.tw/ -->
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>導盲磚範例</title>
+    <style>
+      html {
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+        width: 100%;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+
+      *:focus:not(:focus-visible),
+      *::before:focus:not(:focus-visible),
+      *::after:focus:not(:focus-visible) {
+        outline: none;
+      }
+      input:focus-visible,
+      select:focus-visible,
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px dotted #6f42c1;
+      }
+
+      .visually-hidden {
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        border: 0;
+        padding: 0;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        margin: -1px;
+      }
+
+      /* 隱藏導盲磚，直到它獲得焦點 v1 */
+      /* .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #000;
+        color: #fff;
+        padding: 8px;
+        z-index: 100;
+        text-decoration: none;
+      }
+
+      .skip-link:focus {
+        top: 0;
+      } */
+
+      /* 隱藏導盲磚，直到它獲得焦點 v2 */
+      .skip-main {
+        position: fixed;
+        z-index: 9999;
+        top: 0px;
+        left: calc(50% - 110px);
+        width: 220px;
+        text-align: center;
+        font-size: 1em;
+        color: rgb(255, 255, 255);
+        background-color: rgb(17, 108, 123);
+        transform: translateY(-200px);
+        margin: 10px auto;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        transition: 0.3s ease-in-out;
+      }
+
+      a.skip-main:focus,
+      a.skip-main:active {
+        transform: translateY(0px);
+      }
+
+      nav {
+        display: flex;
+        position: relative;
+        background: #f4f4f4;
+        padding: 1rem;
+        align-items: center;
+        justify-content: space-between;
+      }
+      nav > ul {
+        position: relative;
+        display: flex;
+        list-style: none;
+        gap: 1rem;
+      }
+
+      main {
+        position: relative;
+        padding: 1rem;
+        height: 800px;
+      }
+
+      footer {
+        position: relative;
+        background: #f4f4f4;
+        padding: 1rem;
+      }
+
+      #tabC,
+      #tabB {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        font-size: 0.875rem;
+        color: rgb(0, 0, 0);
+      }
+    </style>
+    <script></script>
+  </head>
+  <body>
+    <!-- 導盲磚鏈接 -->
+    <a href="#tabC" class="skip-main">跳到主要內容</a>
+
+    <header>
+      <!-- 網站導航 -->
+      <nav>
+        <h1>導盲磚範例</h1>
+        <ul>
+          <li>
+            <a id="tabU" href="#tabU" accesskey="u" title="上方導覽連結區"
+              >:::</a
+            >
+          </li>
+          <li><a href="#home">首頁</a></li>
+          <li><a href="#about">關於我們</a></li>
+          <li><a href="#services">服務</a></li>
+          <li><a href="#contact">聯絡我們</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- 主頁橫幅 -->
+    <div class="hero-image">
+      <img
+        src="https://placehold.co/1400x400/000000/FFFFFF.png?text=Hero+image"
+        alt="主頁橫幅"
+      />
+    </div>
+
+    <!-- 主要內容 -->
+    <main>
+      <a id="tabC" href="#tabC" accesskey="c" title="主要內容">:::</a>
+      <h2>主要內容標題</h2>
+
+      <div>
+        <span class="d-block mb-2 h6"
+          >本網站依無障礙網頁設計原則而建置，網站的主要樣版內容分為四個大區塊：</span
+        >
+        <ol class="d-flex flex-wrap">
+          <li class="col-auto mr-5">導覽連結區</li>
+          <li class="col-auto mr-5">主要內容區</li>
+          <li class="col-auto mr-5">下方快速連結區</li>
+        </ol>
+        <p class="d-block mt-4 mb-2 h6 border-top pt-3">
+          本網站的便捷鍵(Accesskey，也稱為快速鍵)設定如下：
+        </p>
+        <p><span>Alt U</span>上方導覽連結區，此區塊列有本網站的主要連結。</p>
+        <p><span>Alt C</span>中間主要內容區，此區塊呈現各網頁的網頁內容。</p>
+        <span><span>Alt B</span>下方快速連結區。</span>
+      </div>
+    </main>
+
+    <footer>
+      <a id="tabB" href="#tabB" accesskey="b" title="頁尾">:::</a>
+      <p>&copy; 2021 導盲磚範例</p>
+    </footer>
+  </body>
+</html>

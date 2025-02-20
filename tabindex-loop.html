@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modal 彈窗範例</title>
+    <style>
+      .modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+      .modal.active {
+        display: block;
+      }
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="openModalBtn">開啟彈窗</button>
+
+    <div id="myModal" class="modal" tabindex="-1">
+      <button class="close-btn" id="closeModalXBtn" tabindex="1">
+        &times;
+      </button>
+      <h2>彈窗標題</h2>
+      <p>這是彈窗的內容。</p>
+      <input type="text" placeholder="輸入文字" tabindex="2" />
+      <button tabindex="3">確認</button>
+      <button tabindex="4" id="closeModalBtn">關閉</button>
+    </div>
+
+    <script>
+      const openModalBtn = document.getElementById('openModalBtn');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const closeModalXBtn = document.getElementById('closeModalXBtn');
+      const modal = document.getElementById('myModal');
+
+      openModalBtn.addEventListener('click', () => {
+        modal.classList.add('active');
+        modal.focus();
+      });
+
+      closeModalBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+
+      closeModalXBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+
+      modal.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab') {
+          const focusableElements = modal.querySelectorAll('input, button');
+          const firstElement = focusableElements[0];
+          const lastElement = focusableElements[focusableElements.length - 1];
+
+          if (event.shiftKey) {
+            if (document.activeElement === firstElement) {
+              event.preventDefault();
+              lastElement.focus();
+            }
+          } else {
+            if (document.activeElement === lastElement) {
+              event.preventDefault();
+              firstElement.focus();
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
