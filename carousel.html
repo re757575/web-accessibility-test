@@ -1,3 +1,6 @@
+<!-- https://medium.com/@a11yvillage/理解-accessibile-components-carousel-篇-下-e302749aa9ea -->
+<!-- https://medium.com/a11yvillage/%E4%BD%BF%E7%94%A8-aria-live-regions-%E8%AE%93%E9%87%8D%E8%A6%81%E8%B3%87%E8%A8%8A%E4%B8%8D%E6%BC%8F%E6%8E%A5-%E4%B8%8A-8994c375bc1e -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -105,11 +108,19 @@
       >
         &#10095;
       </button>
+      <button
+        id="autoplay-button"
+        aria-label="Toggle autoplay"
+        onclick="toggleAutoplay()"
+      >
+        Autoplay
+      </button>
     </div>
 
     <script>
       let currentIndex = 0;
       const items = document.querySelectorAll('.carousel-item');
+      let autoplayInterval = null;
 
       function moveSlide(step) {
         items[currentIndex].setAttribute('aria-hidden', 'true');
@@ -119,6 +130,18 @@
         document.querySelector(
           '.carousel-inner'
         ).style.transform = `translateX(${offset}%)`;
+      }
+
+      function toggleAutoplay() {
+        const button = document.getElementById('autoplay-button');
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+          autoplayInterval = null;
+          button.textContent = 'Autoplay';
+        } else {
+          autoplayInterval = setInterval(() => moveSlide(1), 3000);
+          button.textContent = 'Stop Autoplay';
+        }
       }
 
       // Initial setup: ensure the first item is visible and the others are hidden
